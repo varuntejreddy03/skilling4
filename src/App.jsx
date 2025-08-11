@@ -1,82 +1,30 @@
-import React, { useState } from 'react';
+// App.jsx
+import React from "react";
+import RegistrationForm from "./RegistrationForm";
 
-export default function App() {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [studentId, setStudentId] = useState('');
-  const [agree, setAgree] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState({});
-
-  const validate = () => {
-    const newErrors = {};
-    if (!fullName.trim()) newErrors.fullName = 'Full Name is required';
-    if (!email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = 'Invalid email format';
-    }
-    if (!studentId.trim()) newErrors.studentId = 'Student ID is required';
-    if (!agree) newErrors.agree = 'You must agree to terms';
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formErrors = validate();
-    if (Object.keys(formErrors).length > 0) {
-      setErrors(formErrors);
-    } else {
-      setErrors({});
-      setSubmitted(true);
-      setFullName('');
-      setEmail('');
-      setStudentId('');
-      setAgree(false);
-    }
-  };
-
+function App() {
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Full Name</label>
-      <input
-        type="text"
-        value={fullName}
-        onChange={(e) => setFullName(e.target.value)}
-      />
-      {errors.fullName && <div className="error">{errors.fullName}</div>}
-
-      <label>Email</label>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      {errors.email && <div className="error">{errors.email}</div>}
-
-      <label>Student ID</label>
-      <input
-        type="text"
-        value={studentId}
-        onChange={(e) => setStudentId(e.target.value)}
-      />
-      {errors.studentId && <div className="error">{errors.studentId}</div>}
-
-      <div>
-        <input
-          type="checkbox"
-          checked={agree}
-          onChange={(e) => setAgree(e.target.checked)}
-        />
-        I agree to terms and conditions
+    <div style={{ 
+      display: "flex", 
+      justifyContent: "center", 
+      alignItems: "center", 
+      minHeight: "100vh", 
+      backgroundColor: "#f4f4f4" 
+    }}>
+      <div style={{
+        background: "#fff",
+        padding: "20px",
+        borderRadius: "10px",
+        boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
+        width: "400px"
+      }}>
+        <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
+          User Registration
+        </h2>
+        <RegistrationForm />
       </div>
-      {errors.agree && <div className="error">{errors.agree}</div>}
-
-      <button type="submit" disabled={!fullName || !email || !studentId || !agree}>
-        Submit
-      </button>
-
-      {submitted && <div className="success">Form submitted successfully!</div>}
-    </form>
+    </div>
   );
 }
+
+export default App;
