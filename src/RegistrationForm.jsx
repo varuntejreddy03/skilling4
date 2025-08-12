@@ -10,7 +10,7 @@ export default function RegistrationForm() {
 
   const handleFullNameBlur = () => {
     if (!fullName.trim()) {
-      setErrors((prev) => ({ ...prev, fullName: "Full Name is required" }));
+      setErrors((prev) => ({ ...prev, fullName: "Full name is required" }));
     } else {
       setErrors((prev) => {
         const next = { ...prev };
@@ -22,7 +22,7 @@ export default function RegistrationForm() {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!fullName.trim()) newErrors.fullName = "Full Name is required";
+    if (!fullName.trim()) newErrors.fullName = "Full name is required";
     if (!email.trim()) newErrors.email = "Email is required";
     if (!studentId.trim()) newErrors.studentId = "Student ID is required";
     if (!agreed) newErrors.agreed = "You must agree to the terms";
